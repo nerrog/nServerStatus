@@ -42,4 +42,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: nServerStatus-Action-Build
-          path: x64\Release\nServerStatus.dll nServerStatus
+          path: release.zip
