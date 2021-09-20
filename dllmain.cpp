@@ -1,6 +1,6 @@
 ﻿// dllmain.cpp : DLL アプリケーションのエントリ ポイントを定義します。
 
-//nServerStatus Beta 0.4.0
+//nServerStatus Beta 0.5.0
 
 #include "pch.h"
 #include "framework.h"
@@ -59,6 +59,7 @@ void loadCfg() {
 //TPS計算
 
 THook(void, "?tick@Level@@UEAAXXZ", void* self) {
+    original(self);
     TPScount++;
     now = std::chrono::system_clock::now();
     int interval = std::chrono::duration_cast<std::chrono::milliseconds>(now - prew).count();
@@ -74,6 +75,7 @@ THook(void, "?tick@Level@@UEAAXXZ", void* self) {
 
         prew = std::chrono::system_clock::now();
     }
+
 }
 
 
