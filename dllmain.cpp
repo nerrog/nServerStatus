@@ -87,7 +87,7 @@ THook(void, "?tick@Level@@UEAAXXZ", void* self) {
         //int tortalram = getTotalRAM();
 
     outp.addMessage("---Server Status---\n"
-    "Uptime: "+ std::to_string(elapsed_sec)+" 秒\n"
+    "Uptime: "+ std::to_string(elapsed_sec)+" Sec\n"
     "TPS: "+ std::to_string(CurrentTPS)+"\n"
     //"RamUsed (Total Ram)"+ std::to_string(persentram) +"("+ std::to_string(tortalram) +")"
     );
