@@ -1,6 +1,6 @@
 ﻿// dllmain.cpp : DLL アプリケーションのエントリ ポイントを定義します。
 
-//nServerStatus Beta 0.5.0
+//nServerStatus Beta 0.5.1
 
 #include "pch.h"
 #include "framework.h"
