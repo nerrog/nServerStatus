@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "framework.h"
 #include <iostream>
+#include <chrono>
 #include "GetMemory.h"
 #include <timeapi.h>
 
@@ -82,14 +83,24 @@ THook(void, "?tick@Level@@UEAAXXZ", void* self) {
     bool oncmd_status(CommandOrigin const& ori, CommandOutput & outp){
     //get Uptime
         end = std::chrono::system_clock::now();
-        int elapsed_sec = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
-        //float elapsed_h = elapsed_sec / 3600;
-    //Get RAM
-        //int persentram = getPersentRAM();
-        //int tortalram = getTotalRAM();
+        std::chrono::seconds tmp_sec = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+        int elapsed_h = std::chrono::duration_cast<std::chrono::hours>(end - start).count();
+        tmp_sec -= std::chrono::hours(elapsed_h);
+        int elapsed_min = std::chrono::duration_cast<std::chrono::minutes>(end - start).count();
+        tmp_sec -= std::chrono::minutes(elapsed_min);
+        int elapsed_sec = tmp_sec.count();
+
+        std::string uptime = "";
+        if (elapsed_h != 0) {
+            uptime += std::to_string(elapsed_h) + " h ";
+        }
+        else if (elapsed_min != 0) {
+            uptime += std::to_string(elapsed_min) + " m ";
+        }
+        uptime += std::to_string(elapsed_sec) + " s";
 
     outp.addMessage("---Server Status---\n"
-    "Uptime: "+ std::to_string(elapsed_sec)+" Sec\n"
+    "Uptime: "+ uptime + "\n"
     "TPS: "+ std::to_string(CurrentTPS)+"\n"
     //"RamUsed (Total Ram)"+ std::to_string(persentram) +"("+ std::to_string(tortalram) +")"
     );
